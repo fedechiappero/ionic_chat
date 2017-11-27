@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Chat</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content  padding>
+  <div class="nano has-scrollbar">
+    <div #scrollContainer class="nano-content pad-all" >
+      <ul class="list-unstyled media-block">
+        <li class="mar-btm" *ngFor="let message of messages">
+          <div class="media-left" [ngClass]="{'media-left': message.sender != currentSender, 'media-right': message.sender == currentSender}">
+            <img [src]="message.sender == currentSender ? 'assets/img/avatar2.png': 'assets/img/avatar1.png'" class="img-circle img-sm" alt="Profile Picture">
+          </div>
+          <div class="media-body pad-hor" [ngClass]="{'speech-right': message.sender == currentSender}">
+            <div class="speech">
+              <a href="#" class="media-heading">{{message.sender}}</a>
+              <p>{{message.body}}</p>
+              <p class="speech-time">
+                <i class="fa fa-clock-o fa-fw"></i>
+                {{message.created_at | date: 'shortTime'}}
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <form name="sendMessageForm" (submit)="createMessage()">
+    <ion-grid>
+      <ion-row>
+        <ion-col width-90>
+          <ion-item>
+            <ion-label color="primary" floating>Enter your text</ion-label>
+            <ion-input [(ngModel)]="message.body" name="body"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col width-10>
+          <button [disabled]="!message.body" ion-button icon-right>
+            Send
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    </form>
+  </ion-toolbar>
+</ion-footer>
+
