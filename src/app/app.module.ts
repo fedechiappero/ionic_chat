@@ -19,6 +19,12 @@ import { AuthHttp, AuthConfig, JwtHelper } from 'angular2-jwt';
 import { Storage } from '@ionic/storage';
 import { AuthService } from '../providers/auth-service';
 
+import { ChatListPage } from '../pages/chat-list/chat-list';
+//import { AccountPage } from '../pages/account/account';
+
+//import { RegisterPage } from '../register/register'
+
+
 
 let storage = new Storage({});
 
@@ -38,7 +44,8 @@ export function getAuthHttp(http) {
     ContactPage,
     HomePage,
     TabsPage,
-    ChatPage
+    ChatPage,
+    ChatListPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -55,7 +62,8 @@ export function getAuthHttp(http) {
     ContactPage,
     HomePage,
     TabsPage,
-    ChatPage
+    ChatPage,
+    ChatListPage
   ],
   providers: [
     StatusBar,
