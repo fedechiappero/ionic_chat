@@ -4,6 +4,8 @@ import {Storage} from '@ionic/storage';
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 import {AuthService} from '../../providers/auth-service';
 
+import { ChatListPage } from '../chat-list/chat-list';
+
 /**
  * Generated class for the RegisterPage page.
  *
@@ -30,7 +32,7 @@ export class RegisterPage {
         name: ['', Validators.required],
         email: ['', Validators.required],
         password: ['', Validators.required],
-        confirm_password: ['', Validators.required]
+        password_confirmation: ['', Validators.required]
       });
   }
 
@@ -41,7 +43,7 @@ export class RegisterPage {
   register() {
     
     this.authService.register(this.regData.value)
-      .then(() => this.navCtrl.setRoot('ChatListPage'))
+      .then(() => this.navCtrl.setRoot(ChatListPage))
       .catch(e => console.log("reg error", e));
   }
 
