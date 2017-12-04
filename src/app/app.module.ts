@@ -24,6 +24,7 @@ import { ChatListPage } from '../pages/chat-list/chat-list';
 
 import { RegisterPage } from '../pages/register/register'
 
+import { UserModel } from '../models/user.model';
 
 
 let storage = new Storage({});
@@ -77,7 +78,8 @@ export function getAuthHttp(http) {
       useFactory: getAuthHttp,
       deps: [Http]
     },
-    AuthService
+    AuthService,
+    UserModel
   ]
 })
 export class AppModule {}

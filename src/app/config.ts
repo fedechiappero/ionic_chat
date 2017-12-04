@@ -5,6 +5,7 @@ export let cfg = {
       register: '/auth',
       login: '/auth/sing_in',
       refresh:'/refresh',
+      list: '/users',
     },
     books: '/books'
   };

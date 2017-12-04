@@ -34,10 +34,12 @@ export class AuthService {
     return this.http.post(this.cfg.apiUrl + this.cfg.user.register, userData)
       .toPromise()
       .then(data => {
-        this.saveData(data)
         let rs = data.json();
-        this.idToken = rs.token;
-        this.scheduleRefresh();
+        if(rs.status == "success"){
+          return true
+        }else{
+          return false
+        }
       })
       .catch(e => console.log("reg error", e));
   }

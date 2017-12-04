@@ -1,17 +1,16 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Contact
-    </ion-title>
+      <ion-title>
+          Contacts
+      </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-left></ion-icon>
-      @ionicframework
+      <ion-item *ngFor="let user of users">
+        <p>{{user.id}}</p>
+        <p>{{user.email}}</p>
     </ion-item>
   </ion-list>
 </ion-content>
