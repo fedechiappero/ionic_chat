@@ -3,8 +3,7 @@ import { Component } from '@angular/core';
 import { ChatListPage } from '../chat-list/chat-list';
 import { AboutPage } from '../about/about';
 import { ContactPage } from '../contact/contact';
-//import { RegisterPage } from '../register/register'
-//import { RegisterPage } from '../register-page/register-page'
+import { RegisterPage } from '../register/register'
 
 @Component({
   templateUrl: 'tabs.html'
@@ -15,7 +14,7 @@ export class TabsPage {
   tab1Root: any = ChatListPage;
   tab2Root: any = AboutPage;
   tab3Root: any = ContactPage;
-  //tab4Root: any = RegisterPage;
+  tab4Root: any = RegisterPage;
 
   constructor() {
 

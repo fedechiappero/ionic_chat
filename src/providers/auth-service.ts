@@ -40,8 +40,6 @@ export class AuthService {
         this.scheduleRefresh();
       })
       .catch(e => console.log("reg error", e));
-
-
   }
 
   login(credentials: CredentialsModel) {

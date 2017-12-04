@@ -22,7 +22,7 @@ import { AuthService } from '../providers/auth-service';
 import { ChatListPage } from '../pages/chat-list/chat-list';
 //import { AccountPage } from '../pages/account/account';
 
-//import { RegisterPage } from '../register/register'
+import { RegisterPage } from '../pages/register/register'
 
 
 
@@ -45,7 +45,8 @@ export function getAuthHttp(http) {
     HomePage,
     TabsPage,
     ChatPage,
-    ChatListPage
+    ChatListPage,
+    RegisterPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -63,7 +64,8 @@ export function getAuthHttp(http) {
     HomePage,
     TabsPage,
     ChatPage,
-    ChatListPage
+    ChatListPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,
