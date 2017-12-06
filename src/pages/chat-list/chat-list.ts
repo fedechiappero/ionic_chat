@@ -16,6 +16,19 @@ export class ChatListPage {
     
     }
 
+  /*
+  let modal = this.modalCtrl.create(ChatPage);
+    modal.present();
   
+    this.navCtrl.push(SecondPage, {
+    param1: 'John', param2: 'Johnson'
+    });
+
+    on the other view:
+    this.parameter1 = navParams.get('param1'); 
+    this.parameter2 = navParams.get('param2');
+  
+  
+    */
 
 }

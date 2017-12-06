@@ -4,7 +4,8 @@ import { NavController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import * as AppConfig from '../../app/config'
+import * as AppConfig from '../../app/config';
+
 
 @Component({
   selector: 'page-contact',
@@ -38,6 +39,11 @@ export class ContactPage {
     return this.http.get(`${this.cfg.apiUrl}/${this.cfg.user.list}`).map(res => {
       return res.json();
     });
+  }
+
+  chatToUser(user){
+    console.log("me clickearon " + user);
+    this.navCtrl.parent.select(0);//redirect to chat list page, then popup the respective chat
   }
 
 }

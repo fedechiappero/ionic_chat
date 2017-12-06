@@ -21,6 +21,6 @@ export class MyApp {
       this.splashScreen.hide();
     });
 
-    this.ng2cable.subscribe('http://192.168.11.44:8080/cable', 'ChatChannel');
+    //this.ng2cable.subscribe('http://192.168.11.44:8080/cable', 'ChatChannel');
   }
 }
