@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 
+import { ChattouserService } from '../../services/chattouser';
 
+import { ChatPage } from '../chat/chat';
 
 @Component({
   selector: 'chat-list',
@@ -10,9 +12,9 @@ import { NavController } from 'ionic-angular';
 })
 export class ChatListPage {
 
-
-  
-  constructor( public navCtrl: NavController) {
+  constructor( 
+    public navCtrl: NavController,
+    public chattouser: ChattouserService) {
     
     }
 
@@ -30,5 +32,15 @@ export class ChatListPage {
   
   
     */
+
+  ionViewDidEnter() {
+    if(this.chattouser.getId() === null && this.chattouser.getEmail() === null){
+      console.log("entro para ver todos los chats, no popeo nada");
+    }else{
+      console.log("entro despues de buscar a alguien para un mp nuevo");
+      console.log("id: "+this.chattouser.getId() + " | " + "email: " + this.chattouser.getEmail()) 
+      this.navCtrl.push(ChatPage); 
+    }
+  }
 
 }

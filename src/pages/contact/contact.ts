@@ -6,6 +6,8 @@ import 'rxjs/add/operator/map';
 
 import * as AppConfig from '../../app/config';
 
+import { ChattouserService } from '../../services/chattouser';
+
 
 @Component({
   selector: 'page-contact',
@@ -18,7 +20,8 @@ export class ContactPage {
   
   constructor(
     private http: Http,
-    public navCtrl: NavController) {
+    public navCtrl: NavController,
+    public chattouser: ChattouserService) {
     
       this.cfg = AppConfig.cfg;
     }
@@ -41,8 +44,10 @@ export class ContactPage {
     });
   }
 
-  chatToUser(user){
-    console.log("me clickearon " + user);
+  chatToUser(id, email){
+    console.log("me clickearon " + id);
+    this.chattouser.setId(id);
+    this.chattouser.setEmail(email);
     this.navCtrl.parent.select(0);//redirect to chat list page, then popup the respective chat
   }
 
