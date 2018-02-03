@@ -1,5 +1,5 @@
 export let cfg = {
-    apiUrl: 'http://192.168.11.44:8080/api/v1',
+    apiUrl: 'http://192.168.1.104:8080/api/v1',
     tokenName: 'access-token',
     user: {
       register: '/auth',
@@ -7,5 +7,7 @@ export let cfg = {
       refresh:'/refresh',
       list: '/users',
     },
-    books: '/books'
+    chats:{
+      list: '/chatrooms?userLogged='
+    }, 
   };

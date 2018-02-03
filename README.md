@@ -32,7 +32,18 @@ npm  : 5.5.1
 
 npm install
 
+configure the ip for the api in: src/app/config.ts
+
 ```    
+
+
+### Running
+
+```
+ionic serve
+
+
+``` 
 
 ## Authors
 

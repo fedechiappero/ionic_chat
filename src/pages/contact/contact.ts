@@ -45,7 +45,7 @@ export class ContactPage {
   }
 
   chatToUser(id, email){
-    console.log("me clickearon " + id);
+    console.log("me clickearon " + id);//delete this line when project is completed
     this.chattouser.setId(id);
     this.chattouser.setEmail(email);
     this.navCtrl.parent.select(0);//redirect to chat list page, then popup the respective chat

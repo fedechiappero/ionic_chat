@@ -46,7 +46,9 @@ export class RegisterPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
+    //if user logged in
+    //show account info
+    //else show register form
   }
 
   register() {

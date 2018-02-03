@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
+import { Http } from '@angular/http';
+
+import * as AppConfig from '../../app/config';
 
 import { ChattouserService } from '../../services/chattouser';
 
@@ -12,35 +15,65 @@ import { ChatPage } from '../chat/chat';
 })
 export class ChatListPage {
 
+  private cfg: any;
+  public chats: any[] = [];
+
   constructor( 
+    private http: Http,
     public navCtrl: NavController,
     public chattouser: ChattouserService) {
     
+      this.cfg = AppConfig.cfg;
     }
 
-  /*
-  let modal = this.modalCtrl.create(ChatPage);
-    modal.present();
-  
-    this.navCtrl.push(SecondPage, {
-    param1: 'John', param2: 'Johnson'
-    });
+  ionViewDidLoad() {
 
-    on the other view:
-    this.parameter1 = navParams.get('param1'); 
-    this.parameter2 = navParams.get('param2');
-  
-  
-    */
+    //location.reload(); this seems reload the whole app
+    
+    this.loadChats();
 
-  ionViewDidEnter() {
     if(this.chattouser.getId() === null && this.chattouser.getEmail() === null){
-      console.log("entro para ver todos los chats, no popeo nada");
+      console.log("entro para ver todos los chats, no popeo nada");//delete this line when project is completed
     }else{
-      console.log("entro despues de buscar a alguien para un mp nuevo");
-      console.log("id: "+this.chattouser.getId() + " | " + "email: " + this.chattouser.getEmail()) 
+      console.log("entro despues de buscar a alguien para un mp nuevo");//delete this line when project is completed
+      console.log("id: "+this.chattouser.getId() + " | " + "email: " + this.chattouser.getEmail()) //delete this line when project is completed
       this.navCtrl.push(ChatPage); 
     }
+  }
+
+  ionViewDidLeave(){
+    
+  }
+
+  loadChats() {
+    this.query().subscribe(
+      (chats) => {
+        this.chats = chats.concat(this.chats);
+      }
+    );
+  }
+
+  query() {
+    //'3' needs to be the logged user
+    return this.http.get(`${this.cfg.apiUrl}/${this.cfg.chats.list}` + '3').map(res => {
+      return res.json();
+    });
+  }
+
+  chatToUser(id, email){
+    console.log("me clickearon " + id);//delete this line when project is completed
+    this.chattouser.setId(id);
+    this.chattouser.setEmail(email);
+    this.navCtrl.push(ChatPage);
+  }
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
   }
 
 }
