@@ -26,9 +26,7 @@ export class ChatListPage {
       this.cfg = AppConfig.cfg;
     }
 
-  ionViewDidLoad() {
-
-    //location.reload(); this seems reload the whole app
+  ionViewDidLoad() {//this must be a DidEnter and should refress all the chats
     
     this.loadChats();
 
@@ -41,11 +39,8 @@ export class ChatListPage {
     }
   }
 
-  ionViewDidLeave(){
-    
-  }
-
   loadChats() {
+    this.chats = [];
     this.query().subscribe(
       (chats) => {
         this.chats = chats.concat(this.chats);
@@ -67,13 +62,10 @@ export class ChatListPage {
     this.navCtrl.push(ChatPage);
   }
 
-  doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
-
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      refresher.complete();
-    }, 2000);
-  }
-
+  doRefresh(refresher){
+    this.loadChats();
+ 
+    if(refresher != 0)
+        refresher.complete();
+  }; 
 }
