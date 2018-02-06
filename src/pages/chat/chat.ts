@@ -43,23 +43,23 @@ export class ChatPage {
   //   );
   // }
 
-  // loadMessages() {
-  //   this.messageService.query(this.page).subscribe(
-  //     (messages) => {
-  //       this.messages = messages.reverse().concat(this.messages);
-  //     }
-  //   );
-  // }
+  loadMessages() {
+    this.messageService.query(this.page).subscribe(
+      (messages) => {
+        this.messages = messages.reverse().concat(this.messages);
+      }
+    );
+  }
 
 
-  // createMessage() {
-  //   this.message['sender'] = this.currentSender;
-  //   this.messageService.create({message: this.message}).subscribe(
-  //     ()=> {
-  //       this.message = {};
-  //     }
-  //   );
-  // }
+  createMessage() {
+    this.message['sender'] = this.currentSender;
+    this.messageService.create({message: this.message}).subscribe(
+      ()=> {
+        this.message = {};
+      }
+    );
+  }
 
   // checkUser() {
   //   if (this.getCurrentSender()) {

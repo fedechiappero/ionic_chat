@@ -4,6 +4,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Ng2Cable } from 'ng2-cable';
 import { TabsPage } from '../pages/tabs/tabs';
+import * as AppConfig from '../app/config'
+
 
 
 @Component({
@@ -11,6 +13,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 })
 export class MyApp {
   rootPage = TabsPage;
+  private cfg: any;
 
   constructor(platform: Platform,
               private ng2cable: Ng2Cable,
@@ -21,6 +24,8 @@ export class MyApp {
       this.splashScreen.hide();
     });
 
-    //this.ng2cable.subscribe('http://192.168.11.44:8080/cable', 'ChatChannel');
+    this.cfg = AppConfig.cfg;
+
+    this.ng2cable.subscribe(this.cfg.cable, 'ChatChannel');
   }
 }

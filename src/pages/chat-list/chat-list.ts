@@ -26,7 +26,7 @@ export class ChatListPage {
       this.cfg = AppConfig.cfg;
     }
 
-  ionViewDidLoad() {//this must be a DidEnter and should refress all the chats
+  ionViewDidEnter() {//this must be a DidEnter and should refress all the chats
     
     this.loadChats();
 
