@@ -54,21 +54,16 @@ export class LoginPage {
     return this.http.post(this.cfg.apiUrl + this.cfg.user.login, this.credentialsData)
       .toPromise()
       .then(data => {
-        let rs = data.json().token;
-        this.saveData(data);
-        //this.idToken = rs.token;
-        //this.scheduleRefresh();
-        console.log(rs);
-        
+        let rs = data.json();
+        this.saveData(rs);
       })
       .catch(e => console.log('login error', e));
   }
 
-  saveData(data: any) {
-    
-    let rs = data.json();
-    this.storage.set("user", rs.user);
-    //this.storage.set("id_token", rs.token);
+  saveData(rs: any) {
+    this.storage.set("id_user", rs.data.id);
+    console.log("id logged user: " + rs.data.id);
+    console.log("id logged user: " + rs.data.email);
   }
 
 }
