@@ -62,8 +62,7 @@ export class LoginPage {
 
   saveData(rs: any) {
     this.storage.set("id_user", rs.data.id);
-    console.log("id logged user: " + rs.data.id);
+    this.storage.set("email_user", rs.data.email);
     console.log("id logged user: " + rs.data.email);
   }
-
 }
