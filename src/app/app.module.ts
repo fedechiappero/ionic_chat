@@ -23,9 +23,11 @@ import { ChatListPage } from '../pages/chat-list/chat-list';
 //import { AccountPage } from '../pages/account/account';
 
 import { RegisterPage } from '../pages/register/register'
+import { LoginPage } from '../pages/login/login'
 
 import { UserModel } from '../models/user.model';
 import { ChattouserService } from '../services/chattouser';
+import { CredentialsModel } from '../models/credentials.model';
 
 let storage = new Storage({});
 
@@ -47,7 +49,8 @@ export function getAuthHttp(http) {
     TabsPage,
     ChatPage,
     ChatListPage,
-    RegisterPage
+    RegisterPage,
+    LoginPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -66,7 +69,8 @@ export function getAuthHttp(http) {
     TabsPage,
     ChatPage,
     ChatListPage,
-    RegisterPage
+    RegisterPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
@@ -80,6 +84,7 @@ export function getAuthHttp(http) {
     },
     AuthService,
     UserModel,
+    CredentialsModel,
     ChattouserService
   ]
 })

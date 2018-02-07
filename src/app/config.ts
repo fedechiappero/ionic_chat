@@ -5,7 +5,7 @@ export let cfg = {
   tokenName: 'access-token',
   user: {
     register: '/auth',
-    login: '/auth/sing_in',
+    login: '/auth/sign_in',
     refresh:'/refresh',
     list: '/users',
   },
