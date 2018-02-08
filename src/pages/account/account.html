@@ -1,0 +1,20 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>account</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div *ngIf="logged; else notLogged">
+        <p>just a second champ, your info will be here in a moment</p>
+        <button margin-top ion-button (click)="logout()">{{ 'Logout' }}</button>  
+    </div>
+    
+    <ng-template #notLogged>
+      <p>You may wanna login in order to use this app</p>
+      <button margin-top ion-button (click)="login()">{{ 'Login' }}</button>
+    </ng-template>
+</ion-content>

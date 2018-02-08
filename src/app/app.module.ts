@@ -20,7 +20,7 @@ import { Storage } from '@ionic/storage';
 import { AuthService } from '../providers/auth-service';
 
 import { ChatListPage } from '../pages/chat-list/chat-list';
-//import { AccountPage } from '../pages/account/account';
+import { AccountPage } from '../pages/account/account';
 
 import { RegisterPage } from '../pages/register/register'
 import { LoginPage } from '../pages/login/login'
@@ -50,7 +50,8 @@ export function getAuthHttp(http) {
     ChatPage,
     ChatListPage,
     RegisterPage,
-    LoginPage
+    LoginPage,
+    AccountPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -70,7 +71,8 @@ export function getAuthHttp(http) {
     ChatPage,
     ChatListPage,
     RegisterPage,
-    LoginPage
+    LoginPage,
+    AccountPage
   ],
   providers: [
     StatusBar,

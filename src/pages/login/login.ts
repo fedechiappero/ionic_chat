@@ -7,6 +7,7 @@ import {Http} from '@angular/http';
 import *  as AppConfig from '../../app/config';
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -41,11 +42,15 @@ export class LoginPage {
       this.cfg = AppConfig.cfg;
       this.storage.get('id_user').then(user => {
         this.loggedUser = user;
-    });
+      });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+  }
+
+  ionViewWillLeave(){
+    //this.navCtrl.popToRoot();
   }
 
   login(credentials: CredentialsModel) {
@@ -55,14 +60,16 @@ export class LoginPage {
       .toPromise()
       .then(data => {
         let rs = data.json();
-        this.saveData(rs);
+        this.save(rs);
+        //this.navCtrl.popToRoot();
+        location.reload();
       })
       .catch(e => console.log('login error', e));
   }
 
-  saveData(rs: any) {
-    this.storage.set("id_user", rs.data.id);
-    this.storage.set("email_user", rs.data.email);
-    console.log("id logged user: " + rs.data.email);
+  save(rs: any) {
+    this.storage.set('id_user', rs.data.id);
+    this.storage.set('email_user', rs.data.email);
+    console.log("email logged user: " + rs.data.email);
   }
 }
