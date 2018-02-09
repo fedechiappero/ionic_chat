@@ -6,7 +6,6 @@ import * as AppConfig from '../app/config'
 
 @Injectable()
 export class MessageService {
-  //public apiUrl = 'http://192.168.11.44:8080/api/v1';
 
   private cfg: any;
 

@@ -5,6 +5,7 @@ import *  as AppConfig from '../../app/config';
 import {Storage} from '@ionic/storage';
 
 import { LoginPage } from '../login/login';
+//import { UserloggedService } from '../../services/userlogged';
 
 /**
  * Generated class for the AccountPage page.
@@ -21,7 +22,7 @@ export class AccountPage {
 
   private loggedUser: string;  
   private cfg: any;
-  private logged : boolean = false;
+  public logged : boolean = false;
 
   constructor(
     public navCtrl: NavController, 
@@ -32,13 +33,12 @@ export class AccountPage {
   }
 
   ionViewDidEnter() {
-
     this.storage.get('id_user').then(user => {//finally, this is a Promise()
       this.loggedUser = user;
       if(this.loggedUser == undefined || this.loggedUser == null){
-        console.log('you`re not logged');
+        console.log('you`re not logged :(');
         console.log("id :"+this.loggedUser);
-        this.logged = false;
+        this.logged = false;      
       }else{
         console.log(this.storage.get('email_user'));
         console.log("id :"+this.loggedUser);

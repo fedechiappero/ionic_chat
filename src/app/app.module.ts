@@ -29,6 +29,8 @@ import { UserModel } from '../models/user.model';
 import { ChattouserService } from '../services/chattouser';
 import { CredentialsModel } from '../models/credentials.model';
 
+import { UserloggedService } from '../services/userlogged';
+
 let storage = new Storage({});
 
 export function getAuthHttp(http) {
@@ -87,7 +89,8 @@ export function getAuthHttp(http) {
     AuthService,
     UserModel,
     CredentialsModel,
-    ChattouserService
+    ChattouserService,
+    UserloggedService
   ]
 })
 export class AppModule {}

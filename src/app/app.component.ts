@@ -26,6 +26,6 @@ export class MyApp {
 
     this.cfg = AppConfig.cfg;
 
-    this.ng2cable.subscribe(this.cfg.cable, 'ChatChannel');
+    //this.ng2cable.subscribe(this.cfg.cable, 'ChatChannel');
   }
 }

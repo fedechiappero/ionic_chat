@@ -22,7 +22,7 @@ export class ChattouserService {
     }
 
     setId(id) {
-      this.id = id;     
+        this.id = id;     
     }
   
     getEmail() {
@@ -30,6 +30,6 @@ export class ChattouserService {
     }
 
     getId() {
-      return this.id;
-  }
+        return this.id;
+    }
 }
