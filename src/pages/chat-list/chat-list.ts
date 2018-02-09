@@ -10,8 +10,7 @@ import { UserloggedService } from '../../services/userlogged';
 
 import { ChatPage } from '../chat/chat';
 
-import {Storage} from '@ionic/storage';
-import { Observable } from 'rxjs/Observable';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'chat-list',
@@ -58,15 +57,20 @@ export class ChatListPage {
 
   loadChats() {
     this.chats = [];
-    this.query().subscribe(
-      (chats) => {
-        this.chats = chats.concat(this.chats);
+    this.userlogged.getId().then(user => {
+      this.id = user;
+      this.query(this.id).subscribe(
+        (chats) => {
+          this.chats = chats.concat(this.chats);
       });
+    }).catch(error =>{
+      console.log(error);
+    });
+    
   }
 
-  query() {
-    //'2' needs to be the logged user
-    return this.http.get(`${this.cfg.apiUrl}/${this.cfg.chats.list}` + '2').map(res => {
+  query(id:string) {
+    return this.http.get(`${this.cfg.apiUrl}/${this.cfg.chats.list}` + id).map(res => {
       return res.json();
     });
   }

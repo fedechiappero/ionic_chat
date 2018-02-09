@@ -19,9 +19,8 @@
 
     <ion-list>
         <ion-item *ngFor="let chat of chats">
-            <!-- '3' needs to be the logged user -->
-            <p *ngIf=" chat.user1.id != '2'" (click)="chatToUser(chat.user1.id, chat.user1.email)"> {{ chat.user1.email }} </p> 
-            <p *ngIf=" chat.user2.id != '2'" (click)="chatToUser(chat.user2.id, chat.user2.email)"> {{ chat.user2.email }} </p>
+            <p *ngIf=" chat.user1.id != this.id" (click)="chatToUser(chat.user1.id, chat.user1.email)"> {{ chat.user1.email }} </p> 
+            <p *ngIf=" chat.user2.id != this.id" (click)="chatToUser(chat.user2.id, chat.user2.email)"> {{ chat.user2.email }} </p>
         </ion-item>
     </ion-list>
     
