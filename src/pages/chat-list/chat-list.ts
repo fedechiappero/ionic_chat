@@ -75,10 +75,11 @@ export class ChatListPage {
     });
   }
 
-  chatToUser(id, email){
+  chatToUser(id, email, chatroom){
     console.log("me clickearon " + id);//delete this line when project is completed
     this.chattouser.setId(id);
     this.chattouser.setEmail(email);
+    this.chattouser.setChatroom(chatroom);
     this.navCtrl.push(ChatPage);
   }
 

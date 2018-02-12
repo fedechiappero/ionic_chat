@@ -13,8 +13,8 @@ export class MessageService {
     this.cfg = AppConfig.cfg;
   }
 
-  query(page:any) {
-    return this.http.get(`${this.cfg.apiUrl}/messages?page=${page}`).map(res => {
+  query(chatroom:any) {
+    return this.http.get(`${this.cfg.apiUrl}/messages?chatroom=${chatroom}`).map(res => {
       return res.json();
     });
   }

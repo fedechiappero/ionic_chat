@@ -3,6 +3,7 @@ import { NavController, Content } from 'ionic-angular';
 import { MessageService } from '../../services';
 import { Broadcaster } from 'ng2-cable';
 import { ChattouserService } from '../../services/chattouser';
+import { UserloggedService } from '../../services/userlogged';
 
 @Component({
   selector: 'page-messages',
@@ -13,16 +14,18 @@ export class ChatPage {
   @ViewChild(Content) content: Content;
   public messages: any[] = [];
   public page: number = 1;
-  public currentSender: any;
   public message: any = {};
 
   public email: string;
+  private id;
+  private chatroom;
 
   constructor(
     private messageService: MessageService,
     private broadcaster: Broadcaster,
     public navCtrl: NavController,
-    public chattouser: ChattouserService) {
+    public chattouser: ChattouserService,
+    private userlogged: UserloggedService) {
 
       this.email = this.chattouser.getEmail();
     }
@@ -43,8 +46,13 @@ export class ChatPage {
   //   );
   // }
 
+  ionViewWillLoad(){
+    this.loadMessages();
+  }
+
   loadMessages() {
-    this.messageService.query(this.page).subscribe(
+    this.chatroom = this.chattouser.getChatroom();
+    this.messageService.query(this.chatroom).subscribe(
       (messages) => {
         this.messages = messages.reverse().concat(this.messages);
       }
@@ -53,12 +61,18 @@ export class ChatPage {
 
 
   createMessage() {
-    this.message['sender'] = this.currentSender;
-    this.messageService.create({message: this.message}).subscribe(
-      ()=> {
-        this.message = {};
-      }
-    );
+    this.userlogged.getId().then(user => {
+      this.id = user;
+      this.message['sender_id'] = this.id;
+      this.message['chatroom_id'] = this.chattouser.getChatroom();//this must be a variable
+      this.messageService.create({message: this.message}).subscribe(
+        ()=> {
+          this.message = {};
+        }
+      );
+    }).catch(error =>{
+      console.log(error);
+    });
   }
 
   // checkUser() {

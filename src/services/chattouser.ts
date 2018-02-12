@@ -11,10 +11,12 @@ export class ChattouserService {
 
     email: string;
     id: string;
+    chatroom: string;
  
     constructor() {
         this.id = null;
         this.email = null;
+        this.chatroom = null;
     }
   
     setEmail(email) {
@@ -24,6 +26,10 @@ export class ChattouserService {
     setId(id) {
         this.id = id;     
     }
+
+    setChatroom(chatroom){
+        this.chatroom = chatroom;
+    }
   
     getEmail() {
         return this.email;
@@ -31,5 +37,9 @@ export class ChattouserService {
 
     getId() {
         return this.id;
+    }
+
+    getChatroom(){
+        return this.chatroom;
     }
 }
