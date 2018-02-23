@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Content } from 'ionic-angular';
 import { MessageService } from '../../services';
-import { Broadcaster } from 'ng2-cable';
 import { ChattouserService } from '../../services/chattouser';
 import { UserloggedService } from '../../services/userlogged';
+import * as AppConfig from '../../app/config'
+import { Ng2Cable, Broadcaster } from 'ng2-cable';
 
 @Component({
   selector: 'page-messages',
@@ -15,6 +16,7 @@ export class ChatPage {
   public messages: any[] = [];
   public page: number = 1;
   public message: any = {};
+  private cfg: any;
 
   public email: string;
   private id;
@@ -25,36 +27,34 @@ export class ChatPage {
     private broadcaster: Broadcaster,
     public navCtrl: NavController,
     public chattouser: ChattouserService,
-    private userlogged: UserloggedService) {
+    private userlogged: UserloggedService,
+    private ng2cable: Ng2Cable) {
 
       this.email = this.chattouser.getEmail();
+
+      this.cfg = AppConfig.cfg;
     }
 
-  
-
-  // ionViewDidLoad() {
-  //   this.checkUser();
-  //   this.loadMessages();
-  //   this.content.scrollToBottom();
-
-  //   this.broadcaster.on<string>('CreateMessage').subscribe(
-  //     message => {
-  //       this.messages.push(message);
-  //       this.content.scrollToBottom();
-  //       console.log(message);
-  //     }
-  //   );
-  // }
-
-  ionViewWillLoad(){
+  ionViewDidLoad(){
     this.loadMessages();
+    this.content.scrollToBottom();
+    this.ng2cable.subscribe(this.cfg.cable, 'ChatChannel', {chatroom_id : this.chattouser.getChatroom()});
+
+    this.broadcaster.on<String>('ReceiveMessage').subscribe(
+      message => {
+        console.log("executing broadcaster");
+        this.messages.push(message);
+        this.content.scrollToBottom();
+        console.log(message);
+      }
+    );
   }
 
   loadMessages() {
     this.chatroom = this.chattouser.getChatroom();
     this.messageService.query(this.chatroom).subscribe(
       (messages) => {
-        this.messages = messages.reverse().concat(this.messages);
+        this.messages = messages.concat(this.messages); //reverse().
       }
     );
   }
@@ -91,41 +91,7 @@ export class ChatPage {
   // }
 
   ionViewWillLeave() {
+    this.ng2cable.unsubscribe();
     this.chattouser.constructor(); 
   }
 }
-
-
-// jQuery(document).on 'turbolinks:load', ->
-// messages = $('#messages')
-// if $('#messages').length > 0
-//   messages_to_bottom = -> messages.scrollTop(messages.prop("scrollHeight"))
-
-//   messages_to_bottom()
-
-//   App.global_chat = App.cable.subscriptions.create {
-//       channel: "ChatRoomsChannel"
-//       chat_room_id: messages.data('chat-room-id')
-//     },
-//     connected: ->
-//       # Called when the subscription is ready for use on the server
-
-//     disconnected: ->
-//       # Called when the subscription has been terminated by the server
-
-//     received: (data) ->
-//       messages.append data['message']
-//       messages_to_bottom()
-
-//     send_message: (message, chat_room_id) ->
-//       @perform 'send_message', message: message, chat_room_id: chat_room_id
-
-
-//   $('#new_message').submit (e) ->
-//     $this = $(this)
-//     textarea = $this.find('#message_body')
-//     if $.trim(textarea.val()).length > 1
-//       App.global_chat.send_message textarea.val(), messages.data('chat-room-id')
-//       textarea.val('')
-//     e.preventDefault()
-//     return false

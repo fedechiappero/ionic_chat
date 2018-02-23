@@ -9,7 +9,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ChatPage } from '../pages/chat/chat';
-import { Ng2CableModule } from 'ng2-cable';
+import { Ng2CableModule, Ng2Cable, Broadcaster } from 'ng2-cable';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -90,7 +90,9 @@ export function getAuthHttp(http) {
     UserModel,
     CredentialsModel,
     ChattouserService,
-    UserloggedService
+    UserloggedService,
+    Ng2Cable,
+    Broadcaster
   ]
 })
 export class AppModule {}
