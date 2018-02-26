@@ -21,6 +21,7 @@ export class ChatPage {
   public email: string;
   private id;
   private chatroom;
+  public currentSender: any;
 
   constructor(
     private messageService: MessageService,
@@ -36,6 +37,7 @@ export class ChatPage {
     }
 
   ionViewDidLoad(){
+    this.checkUser();
     this.loadMessages();
     this.content.scrollToBottom();
     this.ng2cable.subscribe(this.cfg.cable, 'ChatChannel', {chatroom_id : this.chattouser.getChatroom()});
@@ -67,7 +69,8 @@ export class ChatPage {
       this.message['chatroom_id'] = this.chattouser.getChatroom();//this must be a variable
       this.messageService.create({message: this.message}).subscribe(
         ()=> {
-          this.message = {};
+          this.message = {}
+          this.message.body = '';
         }
       );
     }).catch(error =>{
@@ -75,20 +78,11 @@ export class ChatPage {
     });
   }
 
-  // checkUser() {
-  //   if (this.getCurrentSender()) {
-  //     this.currentSender = this.getCurrentSender();
-  //   } else {
-  //     this.currentSender = prompt('Please enter your nickname', 'Active user');
-  //     if (this.currentSender) {
-  //       localStorage.setItem('currentSender', this.currentSender);
-  //     }
-  //   }
-  // }
-
-  // getCurrentSender() {
-  //   return localStorage.getItem('currentSender');
-  // }
+  checkUser() {
+    this.userlogged.getId().then(user => {
+      this.currentSender = user;
+    });
+  }
 
   ionViewWillLeave() {
     this.ng2cable.unsubscribe();

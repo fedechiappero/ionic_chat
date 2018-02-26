@@ -6,6 +6,8 @@ import {CredentialsModel} from '../../models/credentials.model';
 import {Http} from '@angular/http';
 import *  as AppConfig from '../../app/config';
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
+import { RegisterPage } from '../register/register';
+import { AlertController } from 'ionic-angular';
 
 
 /**
@@ -32,7 +34,8 @@ export class LoginPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     private credentialsData: CredentialsModel,
-    private http: Http,) {
+    private http: Http,
+    private alertCtrl: AlertController) {
 
       this.loginData = this.formBuilder.group({
         email: ['', Validators.compose([Validators.required])],
@@ -61,15 +64,32 @@ export class LoginPage {
       .then(data => {
         let rs = data.json();
         this.save(rs);
-        //this.navCtrl.popToRoot();
         location.reload();
       })
-      .catch(e => console.log('login error', e));
+      .catch((err) => //err._body show the beauty error, but i dont know how to extract it
+        //console.log(err)
+        this.presentAlert(err.status, err.statusText)
+        
+      );
   }
 
   save(rs: any) {
     this.storage.set('id_user', rs.data.id);
     this.storage.set('email_user', rs.data.email);
     console.log("email logged user: " + rs.data.email);
+  }
+
+  openPage(){
+    this.navCtrl.pop();
+    this.navCtrl.push(RegisterPage); 
+  }
+
+  presentAlert(status, text) {
+    let alert = this.alertCtrl.create({
+      title: status,
+      subTitle: text,
+      buttons: ['Close']
+    });
+    alert.present();
   }
 }

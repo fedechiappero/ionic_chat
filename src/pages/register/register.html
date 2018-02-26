@@ -10,7 +10,7 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>       
-        <ion-title>{{ 'page.register' }}</ion-title>
+        <ion-title>{{ 'Register' }}</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -24,26 +24,21 @@
                 <form [formGroup]="regData" (ngSubmit)="register()">
 
                     <ion-item>
-                        <ion-label floating>{{ 'label.name' }}:</ion-label>
-                        <ion-input type="text" formControlName="name" value="federico"></ion-input>
-                    </ion-item>
-
-                    <ion-item>
-                        <ion-label floating>{{ 'label.email' }}:</ion-label>
+                        <ion-label floating>{{ 'Email' }}:</ion-label>
                         <ion-input type="email" formControlName="email" value="federico@yourdomain.com"></ion-input>
                     </ion-item>
 
                     <ion-item>
-                        <ion-label floating>{{ 'label.password' }}:</ion-label>
+                        <ion-label floating>{{ 'Password' }}:</ion-label>
                         <ion-input type="password" formControlName="password" value="fede0000"></ion-input>
                     </ion-item>
 
                     <ion-item>
-                        <ion-label floating>{{ 'label.password_confirmation' }}:</ion-label>
+                        <ion-label floating>{{ 'Password Confirmation' }}:</ion-label>
                         <ion-input type="password" formControlName="password_confirmation" value="fede0000"></ion-input>
                     </ion-item>
 
-                    <button margin-top ion-button type="submit" [disabled]="!regData.valid">{{ 'button.register' }}</button>
+                    <button margin-top ion-button type="submit" [disabled]="!regData.valid">{{ 'Register' }}</button>
 
                 </form>
 

@@ -8,6 +8,7 @@ import { ChatListPage } from '../chat-list/chat-list';
 import { Http } from '@angular/http';
 import * as AppConfig from '../../app/config';
 import { UserModel } from '../../models/user.model';
+import { AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the RegisterPage page.
@@ -34,42 +35,41 @@ export class RegisterPage {
     public navParams: NavParams,
     public storage: Storage,
     public formBuilder: FormBuilder,
-    public authService: AuthService) {
+    public authService: AuthService,
+    private alertCtrl: AlertController) {
 
       this.cfg = AppConfig.cfg;
       this.regData = this.formBuilder.group({
-        name: ['', Validators.required],
         email: ['', Validators.required],
         password: ['', Validators.required],
         password_confirmation: ['', Validators.required]
       });
   }
 
-  ionViewDidLoad() {
-    //if user logged in
-    //show account info
-    //else show register form
+  register() {
+
+    this.userData = this.regData.value;
+    return this.http.post(this.cfg.apiUrl + this.cfg.user.register, this.userData)
+    .toPromise()
+    .then(data => {
+      let rs = data.json();
+      if(rs.status == "success"){
+        this.presentAlert(rs.status, "You been registered successfully, now you can Login");
+        this.navCtrl.setRoot(ChatListPage)
+      }
+    })
+    .catch((err) => 
+      this.presentAlert(err.status, err.statusText) 
+    );
   }
 
-  register() {
-    
-    // this.authService.register(this.regData.value)
-    //   .then(() => this.navCtrl.setRoot(ChatListPage))
-    //   .catch(e => console.log("reg error", e));
-
-      this.userData = this.regData.value;
-      return this.http.post(this.cfg.apiUrl + this.cfg.user.register, this.userData)
-      .toPromise()
-      .then(data => {
-        let rs = data.json();
-        if(rs.status == "success"){
-          this.navCtrl.setRoot(ChatListPage)
-        }
-      })
-      .catch(function(err){
-        //this.regData.error = err;
-        console.error(err.status, err.statusText);
-      });
+  presentAlert(status, text) {
+    let alert = this.alertCtrl.create({
+      title: status,
+      subTitle: text,
+      buttons: ['Close']
+    });
+    alert.present();
   }
 
 }
