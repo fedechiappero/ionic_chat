@@ -1,14 +1,11 @@
-# Chat (WIP)
+# Chat (frontend)
 
 This project was made as final project of the course Technology Seminary. A private chat room thought to be used by an enterprise for their internal communication. Backend [Ruby on Rails APIRest](https://github.com/fedechiappero/Api-Chat-Rails), Frontend Ionic.
 
-## Functionality (Expected)
+## Functionality
 
-* Registration is only with an email provided by the enterprise email server (@yourdomain.com by default).
-* Private chat rooms, either personal or group.
-* All the messages are encrypted in the server-side.
-* Admin panel Rails Admin.
-
+* Registration/Login.
+* Private chat rooms, only two participants.
 
 ## Getting Started
 
